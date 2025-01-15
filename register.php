@@ -1,21 +1,5 @@
 <?php
-require_once 'classes.php/db.php';
-require_once 'classes.php/register.cl.php';
-$register = new register();
-
-if (isset($_POST['register'])) {
-    $username = htmlspecialchars(trim($_POST['username']));
-    $email = htmlspecialchars(trim($_POST['email']));
-    $password = htmlspecialchars(trim($_POST['password']));
-    $confirmPassword = htmlspecialchars(trim($_POST['confirmPassword']));
-
-    if ($register->registerUser($username, $email, $password, $confirmPassword)) {
-        header('Location: login.php');
-        exit();
-    } else {
-        $msg_error = $register->register_error;
-    }
-}
+require_once 'process/register.process.php';
 ?>
 
 
@@ -58,9 +42,8 @@ if (isset($_POST['register'])) {
                     <i class="fas fa-person"></i>
                     <select name="role" id="role" required>
                         <option value="" disabled selected>Select Role</option>
-                        <option value="student">Student</option>
+                        <option value="student" >Student</option>
                         <option value="teacher">Teacher</option>
-                        <option value="admin">Admin</option>
                     </select>
                 </div>
 

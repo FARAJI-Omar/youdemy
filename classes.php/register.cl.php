@@ -2,7 +2,7 @@
 require_once 'classes.php/db.php';
 
 class register extends connection {
-    
+
     public $register_error = "";
 
     public function userExists($username, $email)
@@ -14,9 +14,9 @@ class register extends connection {
         return $query->rowCount() > 0;
     }
 
-    private function validateInputs($username, $email, $password, $confirmPassword)
+    private function validateInputs($username, $email, $password, $confirmPassword, $role)
     {
-        if (empty($username) || empty($email) || empty($password) || empty($confirmPassword)) {
+        if (empty($username) || empty($email) || empty($password) || empty($confirmPassword) || empty($role)) {
             $this->register_error = "All fields are required!";
             return false;
         } elseif (!preg_match('/^[a-zA-Z0-9_]{4,20}$/', $username)) {
@@ -31,30 +31,49 @@ class register extends connection {
         } elseif ($password !== $confirmPassword) {
             $this->register_error = "Passwords do not match.";
             return false;
+        } elseif (empty($role)) {
+            $this->register_error = "Please select a role.";
+            return false;
         }
         return true; //means all validations passed
     }
 
-    public function registerUser($username, $email, $password, $confirmPassword)
+    public function registerUser($username, $email, $password, $confirmPassword, $role)
     {
         if ($this->userExists($username, $email)) {
             $this->register_error = "User already exists!";
             return false;
         }
-        if (!$this->validateInputs($username, $email, $password, $confirmPassword)) {
+        if (!$this->validateInputs($username, $email, $password, $confirmPassword, $role)) {
             return false;
         }
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $query = $this->conn->prepare("INSERT INTO user (username, email, password) VALUES (:username, :email, :password)");
-        $query->bindParam(":username", $username);
-        $query->bindParam(":email", $email);
-        $query->bindParam(":password", $hashedPassword);
+        if ($role == "teacher") {
+            $query = $this->conn->prepare("INSERT INTO user (username, email, password, user_role, status) VALUES (:username, :email, :password, :role, 'pending')");
+            $query->bindParam(":username", $username);
+            $query->bindParam(":email", $email);
+            $query->bindParam(":password", $hashedPassword);
+            $query->bindParam(":role", $role);
 
-        if ($query->execute()) {
-            return true;
-        } else {
-            $this->register_error = "An error occurred during registration.";
-            return false;
+            if ($query->execute()) {
+                return true;
+            } else {
+                $this->register_error = "An error occurred during registration.";
+                return false;
+            }
+        }else {
+            $query = $this->conn->prepare("INSERT INTO user (username, email, password, user_role) VALUES (:username, :email, :password, :role)");
+            $query->bindParam(":username", $username);
+            $query->bindParam(":email", $email);
+            $query->bindParam(":password", $hashedPassword);
+            $query->bindParam(":role", $role);
+
+            if ($query->execute()) {
+                return true;
+            } else {
+                $this->register_error = "An error occurred during registration.";
+                return false;
+            }
         }
     }
 }

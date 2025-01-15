@@ -422,14 +422,15 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* height: 83.6vh; */
     overflow: hidden;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 /* Register page styles */
 .register-page {
     background-color: #0B2A4A;
-    min-height: 100vh;
+    height: 100vh;
 }
 
 .register-container {
@@ -437,7 +438,7 @@ main {
     justify-content: center;
     align-items: center;
     padding: 40px 20px;
-    height: calc(100vh - 80px);
+    height: 70vh
 }
 
 .signup-form {
@@ -534,30 +535,43 @@ main {
     border: 1px solid #e1e1e1;
     border-radius: 5px;
     font-size: 14px;
-    transition: border-color 0.3s;
+    transition: all 0.3s ease;
     box-sizing: border-box;
     background-color: white;
     color: #818181;
     cursor: pointer;
-    appearance: none; /* Removes default styling */
+    appearance: none;
+}
+
+.form-group select:hover {
+    border-color: #FFB800;
+    background-color: #fff;
 }
 
 .form-group select:focus {
     border-color: #FFB800;
     outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 184, 0, 0.1);
 }
 
 .form-group select option {
-    padding: 8px;
+    padding: 12px;
+    background-color: white;
     color: #333;
 }
 
-/* Style for the placeholder option */
-.form-group select option[disabled] {
-    color: #818181;
+.form-group select option:hover {
+    background-color: #FFB800;
+    color: white;
 }
 
-/* Add a custom arrow icon */
+/* Style for the placeholder/disabled option */
+.form-group select option[disabled] {
+    color: #818181;
+    font-style: italic;
+}
+
+/* Custom dropdown arrow */
 .form-group:has(select)::after {
     content: '▼';
     position: absolute;
@@ -566,7 +580,13 @@ main {
     transform: translateY(-50%);
     color: #818181;
     pointer-events: none;
-    font-size: 12px;
+    font-size: 10px;
+    transition: transform 0.3s ease;
+}
+
+.form-group:has(select:focus)::after {
+    transform: translateY(-50%) rotate(180deg);
+    color: #FFB800;
 }
 
 
