@@ -1,0 +1,582 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 4rem;  
+}
+.header a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo-icon {
+    width: 24px;
+    height: 24px;
+    background-color: #FFB800;
+    margin-right: 8px;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.start-learning-btn {
+    background-color: #FFB800;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.start-learning-btn:hover {
+    background-color: #e6a600;
+} 
+
+main {
+    background-image: url('img/bck.png');
+    background-size: cover;
+    background-position: center;
+    background-color: #0B2A4A;
+    padding-bottom: 40px;
+}
+
+.hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 600px;
+}
+
+.hero-text {
+    flex: 1;
+    max-width: 600px;
+    color: white;
+}
+
+
+.hero-text h1 {
+    font-size: 40px;
+    line-height: 1.2;
+    margin: 0 0 24px 0;
+}
+
+.hero-text p {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    opacity: 0.8;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.btn-start {
+    background-color: #FFB800;
+    color: white;
+    padding: 16px 32px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-start:hover {
+    background-color: #a87900;
+}
+
+.btn-view {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hero-image {
+    flex: 1;
+    max-width: 500px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image_main {
+    width: 350px;
+    height: 250px;
+    position: relative;
+}
+
+.review-box {
+    position: absolute;
+    right: -50px;
+    top: 50%;
+    padding: 20px;
+    border-radius: 15px;
+    width: 200px;
+    transform: translateY(-50%);
+}
+
+.review-text {
+    color: #5b5b5b;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    font-style: italic;
+}
+
+.reviewer-name {
+    color: #0B2A4A;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.tech_icons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.tech_icons img {
+    width: 100%;
+    height: 100%;
+}
+
+.student_review {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
+.review-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 20px;
+    border-radius: 15px;
+    width: 800px;
+}
+
+.review-image img {
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.review-content {
+    width: 400px;
+}
+
+.review-content .review-text {
+    color: #818181;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    font-style: italic;
+}
+
+.review-content .reviewer-name {
+    color: #0B2A4A;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+
+.recomended_courses {
+    padding: 60px 4rem;
+    background-color: #f8f9fa;
+    margin-top: 100px;
+}
+
+.recomended_courses h2 {
+    text-align: center;
+    color: #0B2A4A;
+    font-size: 32px;
+    margin-bottom: 40px;
+}
+
+.courses-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.course-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+}
+
+.course-image {
+    height: 200px;
+    overflow: hidden;
+}
+
+.course-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.course-content {
+    padding: 20px;
+}
+
+.course-category {
+    color: #FFB800;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.course-content h3 {
+    color: #0B2A4A;
+    font-size: 18px;
+    margin: 10px 0;
+    line-height: 1.4;
+    min-height: 50px;
+}
+
+.course-meta {
+    display: flex;
+    gap: 20px;
+    color: #818181;
+    font-size: 14px;
+    margin-top: 15px;
+}
+.read_more a{
+    text-decoration: none;
+    color: #0B2A4A;
+    font-weight: 600;
+    margin-left: 100px;
+}
+
+.before_footer{
+    background-image: url('img/bck.png');
+    background-size: cover;
+    background-position: center;
+    background-color: #0B2A4A;
+    width: 100%;
+    height: 300px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    padding-top: 40px;
+}
+
+.before_footer_content h1{
+    font-size: 32px;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.join_now a{
+    position: absolute;
+    left: 50%;
+    top: 250px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    background-color: #FFB800;
+    padding: 10px 20px;
+    border-radius: 5px;
+
+}
+
+.footer {
+    background-color: #000;
+    color: white;
+    padding: 60px 0;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 4rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+}
+
+.footer-brand {
+    max-width: 300px;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.footer-logo .logo-icon {
+    width: 24px;
+    height: 24px;
+    background-color: #FFB800;
+}
+
+.footer-logo .logo-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+.brand-description {
+    color: #818181;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-size: 13px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    color: white;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.footer-section h3 {
+    color: white;
+    font-size: 15px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 12px;
+    color: #818181;
+    font-size: 12px;
+}
+
+.footer-section ul li a {
+    color: #818181;
+    text-decoration: none;
+    font-size: 12px;
+    transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: white;
+}
+
+
+/* register */
+
+.register-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 83.6vh; */
+    overflow: hidden;
+}
+
+/* Register page styles */
+.register-page {
+    background-color: #0B2A4A;
+    min-height: 100vh;
+}
+
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    height: calc(100vh - 80px);
+}
+
+.signup-form {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.signup-form h2 {
+    color: #0B2A4A;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+
+.error-message {
+    background-color: #ffe6e6;
+    color: #ff3333;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.form-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #818181;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    border-color: #FFB800;
+    outline: none;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #FFB800;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.register-btn:hover {
+    background-color: #e6a600;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+    color: #818181;
+    font-size: 14px;
+}
+
+.login-link a {
+    color: #FFB800;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+    background-color: white;
+    color: #818181;
+    cursor: pointer;
+    appearance: none; /* Removes default styling */
+}
+
+.form-group select:focus {
+    border-color: #FFB800;
+    outline: none;
+}
+
+.form-group select option {
+    padding: 8px;
+    color: #333;
+}
+
+/* Style for the placeholder option */
+.form-group select option[disabled] {
+    color: #818181;
+}
+
+/* Add a custom arrow icon */
+.form-group:has(select)::after {
+    content: '▼';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #818181;
+    pointer-events: none;
+    font-size: 12px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
