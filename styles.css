@@ -698,10 +698,6 @@ aside a{
     font-size: 13px;
 }
 
-.student_user p:hover, .teacher_user p:hover {
-    transform: scale(1.02);
-}
-
 
 .student_user:last-child, .teacher_user:last-child {
     border-bottom: none;
