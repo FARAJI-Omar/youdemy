@@ -49,7 +49,7 @@ class register extends connection {
         }
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         if ($role == "teacher") {
-            $query = $this->conn->prepare("INSERT INTO user (username, email, password, user_role, status) VALUES (:username, :email, :password, :role, 'pending')");
+            $query = $this->conn->prepare("INSERT INTO user (username, email, password, user_role, status) VALUES (:username, :email, :password, :role, 'suspended')");
             $query->bindParam(":username", $username);
             $query->bindParam(":email", $email);
             $query->bindParam(":password", $hashedPassword);

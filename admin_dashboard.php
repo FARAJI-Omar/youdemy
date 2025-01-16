@@ -56,6 +56,24 @@ require_once 'classes/admin.cl.php';
             </div>
             <div class="content-section" id="manage-content">
                 <h1>Manage content</h1>
+                <a href="#">Courses</a>
+                <a href="#">Categories</a>
+                <a href="#">Tags</a>
+                <div class="content_container" id="courses_container">
+                    <div class="">
+                        <h2>Courses</h2>
+                    </div>
+                </div>
+                <div class="content_container" id="categories_container">
+                    <div class="">
+                        <h2>Categories</h2>
+                    </div>
+                </div>
+                <div class="content_container" id="tags_container">
+                    <div class="">
+                        <h2>Tags</h2>
+                    </div>
+                </div>
             </div>
             <div class="content-section" id="statistics">
                 <h1>Statistics</h1>
@@ -76,6 +94,7 @@ require_once 'classes/admin.cl.php';
         function showSection(section) {
             //hide all sections
             const sections = document.querySelectorAll('.content-section');
+            const links = document.querySelectorAll('.content-section a');
             sections.forEach((sec) => {
                 sec.style.display = 'none';
             });

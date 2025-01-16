@@ -9,5 +9,4 @@ if($admin->delete_user($_GET['user_id'])){
 }else{
     header('Location: ../admin_dashboard.php?error');
 }
-
 ?>
