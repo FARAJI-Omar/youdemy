@@ -1,5 +1,5 @@
 <?php
-require_once 'classes.php/db.php';
+require_once 'classes/db.php';
 
 class login extends connection
 {
@@ -17,7 +17,7 @@ class login extends connection
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['user_role'] = $user['user_role'];
-                $_SESSION["status"] = $user["banned"];
+                $_SESSION["status"] = $user["status"];
 
                 // if the user role is admin
                 if ($user['user_role'] === 'admin') {

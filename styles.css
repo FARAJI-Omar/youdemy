@@ -24,7 +24,9 @@ body {
 .logo-icon {
     width: 24px;
     height: 24px;
-    background-color: #FFB800;
+    background-image: url(img/TensorPix\ -\ logo_udm.jpeg);
+    background-size: cover;
+    background-position: center;
     margin-right: 8px;
 }
 
@@ -358,7 +360,9 @@ main {
 .footer-logo .logo-icon {
     width: 24px;
     height: 24px;
-    background-color: #FFB800;
+    background-image: url(img/TensorPix\ -\ logo_udm.jpeg);
+    background-size: cover;
+    background-position: center;
 }
 
 .footer-logo .logo-text {
@@ -429,7 +433,9 @@ main {
 
 /* Register page styles */
 .register-page {
-    background-color: #0B2A4A;
+    background-image: url(img/bck.png);
+    background-size: cover;
+    background-position: center;
     height: 100vh;
 }
 
@@ -589,8 +595,169 @@ main {
     color: #FFB800;
 }
 
+/* admin dashboard */
+
+.admin-header{
+    background-image: url('img/bck.png');
+}
+
+.admin_body{
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    gap: 20px;
+}
+aside{
+    background: linear-gradient(135deg, #15375c 8.5%, #0e3c6e 8%);
+    width: 10%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.admin-profile{
+    width: 40px;
+    height: 40px;
+    margin-top: 20px;
+}
+
+.admin-name{
+    color: white;
+    font-size: 13px;
+    margin-top: 10px;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 60px;
+}
+
+aside a{
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+    margin-top: 10px;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 20px;
+}
+
+.main-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    position: relative;
+}
+
+.content-section{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 95%;
+    height: 100%;
+}
+.content-section h1{
+    color: #0B2A4A;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* manage users */
+
+.users_container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.students_container, .teachers_container {
+    background: #0e3c6e0b;
+    border-radius: 10px;
+    padding: 20px;
+    width: 48%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.students_container h2, .teachers_container h2 {
+    color: #0B2A4A;
+    font-size: 22px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #FFB800;
+    padding-bottom: 10px;
+}
+
+.student_user, .teacher_user {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 15px 0;
+    border-bottom: 1px solid #e1e1e1;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+.student_user p:hover, .teacher_user p:hover {
+    transform: scale(1.02);
+}
 
 
+.student_user:last-child, .teacher_user:last-child {
+    border-bottom: none;
+}
+
+.suspend_button{
+    background-color: #c9d219;
+    display: inline-block;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none; 
+}
+.delete_button{
+    background-color: #c90d0d;
+    display: inline-block;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none; 
+}
+
+.activate_button:hover {
+    background-color: #026902;
+    transform: scale(1.05);
+}
+.suspend_button:hover {
+    background-color: #949c04;
+    transform: scale(1.05);
+}
+.delete_button:hover {
+    background-color: #8f0707;
+    transform: scale(1.05);
+}
+
+.activate_button {
+    display: inline-block;
+    padding: 5px 10px;
+    text-decoration: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;  
+}
+
+.activate_button:hover {
+    background-color: #45a049;
+}
 
 
 

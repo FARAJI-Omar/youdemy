@@ -45,6 +45,7 @@ require_once 'process/login.process.php';
             </div>
         </div>
     </div>
+    <?php include 'footer.php';?>
 </body>
 
 </html>

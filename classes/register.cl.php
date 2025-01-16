@@ -1,5 +1,5 @@
 <?php
-require_once 'classes.php/db.php';
+require_once 'classes/db.php';
 
 class register extends connection {
 

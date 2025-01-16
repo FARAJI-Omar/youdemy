@@ -65,6 +65,7 @@ require_once 'process/register.process.php';
             </div>
         </div>
     </div>
+    <?php include 'footer.php';?>
 </body>
 
 </html>
