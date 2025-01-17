@@ -1,5 +1,6 @@
 <?php
 require_once 'classes/db.php';
+session_start();
 
 class login extends connection
 {
@@ -42,6 +43,16 @@ class login extends connection
             $this->login_error = "Invalid email or password!";
             return false;
         }
+    }
+
+    public function get_username()
+    {
+        $stmt = "SELECT username from user where user_id = :user_id";
+        $query = $this->conn->prepare($stmt);
+        $query->bindParam(":user_id", $_SESSION["user_id"]);
+        $query->execute();
+        $user = $query->fetch();
+        echo $user;
     }
 }
 ?>

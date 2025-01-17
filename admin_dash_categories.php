@@ -10,13 +10,12 @@ require_once 'classes/login.cl.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Admin Dashboard</title>
+    <title>Document</title>
 </head>
 
 <body>
     <div class="admin-header">
-        <?php include 'header.php';?>
-        
+        <?php include 'header.php'; ?>
     </div>
 
     <div class="admin_body">
@@ -29,11 +28,28 @@ require_once 'classes/login.cl.php';
         </aside>
 
         <div class="main-container">
-            <div class="content-section" id="welcome">
-                <h1>Welcome to the admin dashboard</h1>
+            <div class="content-section" id="manage-content">
+                <h1>Manage content</h1>
+                <div class="content_links">
+                    <a href="admin_dash_courses.php">Courses</a>
+                    <a href="admin_dash_categories.php">Categories</a>
+                    <a href="admin_dash_tags.php">Tags</a>
+                </div>
+                <div class="content_container" id="courses_container">
+                    <div class="">
+                        <h2>Categories</h2>
+                    </div>
+                </div>
+              
             </div>
         </div>
     </div>
+
+
+
+
+
+
     <?php include 'footer.php'; ?>
 </body>
 

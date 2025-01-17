@@ -13,6 +13,12 @@ body {
     text-decoration: none;
     color: white;
     font-weight: bold;
+    transition: 0.2s; 
+}
+
+.header a:hover{
+    color: #FFB800;
+    transform: scale(1.07);
 }
 
 .logo {
@@ -627,7 +633,7 @@ aside{
     color: white;
     font-size: 13px;
     margin-top: 10px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif; 
     margin-bottom: 60px;
 }
 
@@ -638,7 +644,15 @@ aside a{
     margin-top: 10px;
     font-family: 'Poppins', sans-serif;
     margin-bottom: 20px;
+    transition: 0.2s;
 }
+
+aside a:hover, .admin-name:hover{
+    color: #FFB800;
+    transform: scale(1.07);
+    font-weight: bold;
+}
+
 
 .main-container{
     display: flex;
@@ -753,6 +767,39 @@ aside a{
 
 .activate_button:hover {
     background-color: #45a049;
+}
+
+
+/*content management */
+.content-section#manage-content .content_links {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 30px;
+    background: #FFB800;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.content-section#manage-content a {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    color: #0B2A4A;
+    font-weight: 600;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+    border-right: 1px solid #ddd;
+}
+
+.content-section#manage-content a:last-child {
+    border-right: none;
+}
+
+.content-section#manage-content a:hover {
+    background-color: #0e3c6e;
+    color: white;
+    border-radius: 4px;
 }
 
 
