@@ -1,6 +1,7 @@
 <?php
 require_once 'classes/admin.cl.php';
 require_once 'classes/login.cl.php';
+require_once 'classes/admin_get_courses.cl.php';   
 ?>
 
 <!DOCTYPE html>
@@ -31,13 +32,15 @@ require_once 'classes/login.cl.php';
             <div class="content-section" id="manage-content">
                 <h1>Manage content</h1>
                 <div class="content_links">
-                    <a href="admin_dash_courses.php">Courses</a>
+                    <a href="admin_dash_courses.php" id="courses">Courses</a>
                     <a href="admin_dash_categories.php">Categories</a>
                     <a href="admin_dash_tags.php">Tags</a>
                 </div>
                 <div class="content_container" id="courses_container">
-                    <div class="">
-                        <h2>Courses</h2>
+                    <div class="courses_container">
+                        <?php $admin_get_courses = new admin_get_courses();
+                        $admin_get_courses->get_courses();
+                        ?>
                     </div>
                 </div>
               

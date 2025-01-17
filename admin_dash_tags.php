@@ -33,7 +33,7 @@ require_once 'classes/login.cl.php';
                 <div class="content_links">
                     <a href="admin_dash_courses.php">Courses</a>
                     <a href="admin_dash_categories.php">Categories</a>
-                    <a href="admin_dash_tags.php">Tags</a>
+                    <a href="admin_dash_tags.php" id="tags">Tags</a>
                 </div>
                 <div class="content_container" id="courses_container">
                     <div class="">

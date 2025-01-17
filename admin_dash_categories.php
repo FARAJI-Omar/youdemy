@@ -32,12 +32,12 @@ require_once 'classes/login.cl.php';
                 <h1>Manage content</h1>
                 <div class="content_links">
                     <a href="admin_dash_courses.php">Courses</a>
-                    <a href="admin_dash_categories.php">Categories</a>
+                    <a href="admin_dash_categories.php" id="categories">Categories</a>
                     <a href="admin_dash_tags.php">Tags</a>
                 </div>
                 <div class="content_container" id="courses_container">
                     <div class="">
-                        <h2>Categories</h2>
+                        <!-- categories -->
                     </div>
                 </div>
               
