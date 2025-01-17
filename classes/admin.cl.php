@@ -74,7 +74,7 @@ class admin extends connection
         $query->bindParam(':user_id', $user_id);
         $query->execute();
     }
-  
+
 
     public function delete_user($user_id)
     {
@@ -87,5 +87,27 @@ class admin extends connection
         $query = $this->conn->prepare("UPDATE user SET status = 'suspended' WHERE user_id = :user_id");
         $query->bindParam(':user_id', $user_id);
         $query->execute();
+    }
+
+    public function create_category($category)
+    {
+        $query = $this->conn->prepare("INSERT INTO category (category_name) VALUES (:category_name)");
+        $query->bindParam(':category_name', $category);
+        $query->execute();
+    }
+
+    public function delete_category($category_id)
+    {
+        $query = $this->conn->prepare("DELETE FROM category WHERE category_id = :category_id");
+        $query->bindParam(':category_id', $category_id);
+        $query->execute();
+    }
+
+    public function get_categories()
+    {
+        $query = $this->conn->prepare("SELECT * FROM category ORDER BY category_name ASC");
+        $query->execute();
+        $categories = $query->fetchAll();
+        return $categories;
     }
 }
