@@ -155,4 +155,41 @@ class admin extends user {
             echo "<div class='no-courses'>No courses found</div>";
         }
     }
+
+    public function create_tag($tag_name)
+    {
+        $query = $this->conn->prepare("INSERT INTO tag (tag_name) VALUES (:tag_name)");
+        $query->bindParam(':tag_name', $tag_name);
+        $query->execute();
+    }  
+
+    //admin: get tags with a delete button
+    public function get_tags()
+    {
+        $query = $this->conn->prepare("SELECT * FROM tag ORDER BY tag_name ASC");
+        $query->execute();
+        $tags = $query->fetchAll();
+        
+        if (is_array($tags) && !empty($tags)) {
+            echo "<div>";
+            foreach ($tags as $tag) {
+                echo '<div class="category_tag_delete">
+                        <span class="category_tag_d">' . htmlspecialchars($tag['tag_name']) . 
+                        '<a href="process/delete_tag.process.php?tag_id=' . htmlspecialchars($tag['tag_id']) . '" id="delete_tag_btn">×</a>
+                        </span>
+                      </div>';
+            }
+            echo "</div>";
+        } else {
+            echo "<div>No tags found</div>";
+        }
+    }
+
+    public function delete_tag($tag_id)
+    {
+        $query = $this->conn->prepare("DELETE FROM tag WHERE tag_id = :tag_id");
+        $query->bindParam(':tag_id', $tag_id);
+        $query->execute();
+    }
 }
+

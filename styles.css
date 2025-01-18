@@ -822,7 +822,7 @@ aside a:hover, .admin-name:hover{
     display: none;
 }
 
-/* Add these styles for course management */
+/* course management */
 .courses-box {
     display: flex;
     flex-wrap: wrap;
@@ -944,7 +944,7 @@ aside a:hover, .admin-name:hover{
     margin-right: 10px;
 }
 
-/* Add Category Section */
+/* add Category Section */
 .add-category-form {
     display: flex;
     gap: 10px;
@@ -979,7 +979,7 @@ aside a:hover, .admin-name:hover{
     background: #26752a;
 }
 
-/* Delete Categories Section */
+/* delete Categories Section */
 
 
 .no-categories {
@@ -989,7 +989,6 @@ aside a:hover, .admin-name:hover{
     padding: 10px;
 }
 
-/* Update the delete categories section styles */
 .categories-list.delete-mode {
     height: 40px;
     overflow-y: scroll;
@@ -1017,7 +1016,7 @@ aside a:hover, .admin-name:hover{
 
 .category_tag_delete .category_tag_d {
     display: inline-block;
-    padding-right: 30px; /* Make room for the × icon */
+    padding-right: 30px;
 }
 
 #delete_cat_btn {
@@ -1040,8 +1039,99 @@ aside a:hover, .admin-name:hover{
     margin-top: 10px;
 }
 
+/* tags management */
+.add_tags_section{
+    width: 95%;
+    justify-self: center;
+    margin-top: 50px;
+    background: #edebeb;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
+.add_tags_section h3{
+    color: #0B2A4A;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
 
+.add_tag_form{
+    display: flex;
+    gap: 20px;
+}
+
+.add_tags_btn{
+    background: #4CAF50;
+    color: white;
+    border: none;
+    text-decoration: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.add_tags_btn:hover {
+    background: #1b5a1e;
+}
+
+.add_tag_input{
+    outline: 1px solid #4CAF50 !important;
+    border-radius: 4px;
+    padding: 8px 15px;
+    font-size: 14px;
+    width: 90%;
+}
+
+/* delete tags */
+
+#delete_tag_btn {
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    width: 20px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: white !important;
+    background: transparent !important;
+}
+
+#delete_tag_btn:hover {
+    background-color: red !important;
+    width: 45px !important;
+    height: 10px !important;
+    margin-right: 17px;
+    margin-top: 10px;
+}
+
+.tags-list.delete-mode {
+    height: 40px;
+    overflow-x: scroll;
+}
+
+/* hide scrollbar */
+.tags-list.delete-mode::-webkit-scrollbar {
+    display: none;
+}
+
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    background: #f5f5f5;
+    border-radius: 6px;
+    height: 40px;
+    overflow: scroll;
+    border: 1px solid #0e3c6e;
+    padding-top: 25px;
+}
+/* hide scrollbar */
+.tags-list::-webkit-scrollbar {
+    display: none;
+}
 
 
 

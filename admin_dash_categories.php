@@ -52,7 +52,7 @@ require_once 'classes/login.cl.php';
                             <div class="categories-list delete-mode">
                             <?php
                                 $admin = new admin();
-                                $categories = $admin->get_categories();
+                                $tags = $admin->get_tags();
                                 ?>
                             </div>
                         </div>

@@ -10,6 +10,9 @@ require_once 'classes/login.cl.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
     <title>Document</title>
 </head>
 
@@ -36,8 +39,25 @@ require_once 'classes/login.cl.php';
                     <a href="admin_dash_tags.php" id="tags">Tags</a>
                 </div>
                 <div class="content_container" id="courses_container">
-                    <div class="">
-                        <!-- here -->
+                    <div class="tags_container">
+                        <div class="add_tags_section">
+                            <h3>Add Tag</h3>
+                            <form action="process/create_tag.process.php" method="POST" class="add_tag_form">
+                                <input type="text" name="tag_name" placeholder="Enter tag name..." class="add_tag_input" autofocus>
+                                <input value="Add Tags" href="process/create_tag.process.php" type="submit" class="add_tags_btn">
+                            </form>
+                        </div>
+                        <div class="add_tags_section">
+                            <h3>Delete tag</h3>
+                            <div class="tags-list delete-mode">
+                            <?php
+                                $admin = new admin();
+                                $tags = $admin->get_tags();
+                                ?>
+                            </div>
+                        </div>
+                        
+
                     </div>
                 </div>
               
@@ -52,6 +72,11 @@ require_once 'classes/login.cl.php';
 
 
     <?php include 'footer.php'; ?>
+
+    <script>
+        var input = document.querySelector('input[name="tag_name"]');
+        new Tagify(input);
+    </script>
 </body>
 
 </html>
