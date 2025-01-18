@@ -3,6 +3,18 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+/* message box */
+.message_box{
+    background-color: #FFB800;
+    color: white;
+    padding: 30px;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
 /* header */
 .header {
     display: flex;

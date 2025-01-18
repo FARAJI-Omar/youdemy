@@ -3,6 +3,7 @@ require_once 'classes/admin.cl.php';
 require_once 'classes/login.cl.php';
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,6 +25,7 @@ require_once 'classes/login.cl.php';
             <a href="admin_dashboard.php" style="text-decoration: none;"><h3 class="admin-name"><?php echo $_SESSION['username'];?></h3></a>
             <a href="admin_manage_users.php">Manage users</a>
             <a href="admin_manage_content.php">Manage content</a>
+            <a href="process/logout.php">Logout</a>
             <a href="admin_statistics.php">Statistics</a>
         </aside>
 

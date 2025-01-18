@@ -1,3 +1,6 @@
+<?php
+require_once 'classes/login.cl.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +21,7 @@
                 <h1>Unlock Your Potential with Online Learning</h1>
                 <p>Join our community of learners and instructors. Whether you want to learn or teach, our platform provides the tools and resources you need to succeed in today's digital world.</p>
                 <div class="hero-buttons">
-                    <a href="#" class="btn-start">Get Started</a>
+                    <a href="login.php" class="btn-start">Get Started</a>
                     <a href="#" class="btn-view">→ Browse Courses</a>
                 </div>
             </div>
@@ -111,7 +114,7 @@
             <p>Start your journey to success today with our platform. Whether you want to learn or teach, we have the resources and support you need to thrive in today's digital world.</p>
         </div>
         <div class="join_now">
-            <a href="">join now</a>
+            <a href="login.php">join now</a>
         </div>
     </div>
 

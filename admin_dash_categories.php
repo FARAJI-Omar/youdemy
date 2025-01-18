@@ -3,6 +3,15 @@ require_once 'classes/admin.cl.php';
 require_once 'classes/login.cl.php';
 ?>
 
+<?php 
+// Display the message if set
+if (isset($_GET['message'])) {
+    echo "<div class='message_box'>" . htmlspecialchars($_GET['message']) . "</div>";
+    //add a delay of 2 seconds and remove the message
+    echo "<script>setTimeout(() => { window.location.href = 'admin_dash_categories.php'; }, 2000);</script>";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,6 +35,7 @@ require_once 'classes/login.cl.php';
             </a>
             <a href="admin_manage_users.php">Manage users</a>
             <a href="admin_manage_content.php">Manage content</a>
+            <a href="process/logout.php">Logout</a>
             <a href="admin_statistics.php">Statistics</a>
         </aside>
 
@@ -52,7 +62,7 @@ require_once 'classes/login.cl.php';
                             <div class="categories-list delete-mode">
                             <?php
                                 $admin = new admin();
-                                $tags = $admin->get_tags();
+                                $categories = $admin->get_categories();
                                 ?>
                             </div>
                         </div>

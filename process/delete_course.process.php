@@ -9,12 +9,15 @@ if (isset($_GET['course_id'])) {
     if (isset($_SESSION['user_role'])) {
         switch ($_SESSION['user_role']) {
             case 'admin':
-                header('Location: ../admin_dash_courses.php');
+                $message = "Course deleted successfully";
+                header("Location: ../admin_dash_courses.php?message=$message");
                 break;
             case 'teacher':
+                $message = "Course deleted successfully";
                 header('Location: ../teacher_dash_courses.php');
                 break;
             case 'student':
+                $message = "Course deleted successfully";
                 header('Location: ../student_dash_courses.php');
                 break;
             default:
@@ -25,6 +28,7 @@ if (isset($_GET['course_id'])) {
     }
     exit();
 } else {
-    header('Location: ../admin_dash_courses.php?error=invalid_request');
+    $message = "Invalid request";
+    header("Location: ../admin_dash_courses.php?message=$message");
     exit();
 }
