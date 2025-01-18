@@ -1,8 +1,14 @@
 <?php
-require_once 'db.php';
+require_once 'user.cl.php';
+class admin extends user {
+    protected $conn;
 
-class admin extends connection
-{
+    public function __construct()
+    {
+        $db = new connection();
+        $this->conn = $db->get_conn();
+    }
+
     public function get_students()
     {
         $query = $this->conn->prepare("SELECT * FROM user WHERE user_role = 'student'");
@@ -35,6 +41,7 @@ class admin extends connection
             echo "<div>No students found</div>";
         }
     }
+
     public function get_teachers()
     {
         $query = $this->conn->prepare("SELECT * FROM user WHERE user_role = 'teacher'");
@@ -75,13 +82,13 @@ class admin extends connection
         $query->execute();
     }
 
-
     public function delete_user($user_id)
     {
         $query = $this->conn->prepare("DELETE FROM user WHERE user_id = :user_id");
         $query->bindParam(':user_id', $user_id);
         $query->execute();
     }
+
     public function suspend_user($user_id)
     {
         $query = $this->conn->prepare("UPDATE user SET status = 'suspended' WHERE user_id = :user_id");
@@ -96,6 +103,27 @@ class admin extends connection
         $query->execute();
     }
 
+    public function get_categories()
+    {
+        $query = $this->conn->prepare("SELECT * FROM category ORDER BY category_name ASC");
+        $query->execute();
+        $categories = $query->fetchAll();
+        
+        if (is_array($categories) && !empty($categories)) {
+            echo "<div>";
+            foreach ($categories as $category) {
+                echo '<div class="category_tag_delete">
+                        <span class="category_tag_d">' . htmlspecialchars($category['category_name']) . 
+                        '<a href="process/delete_category.process.php?category_id=' . htmlspecialchars($category['category_id']) . '" id="delete_cat_btn">×</a>
+                        </span>
+                      </div>';
+            }
+            echo "</div>";
+        } else {
+            echo "<div>No categories found</div>";
+        }
+    }
+
     public function delete_category($category_id)
     {
         $query = $this->conn->prepare("DELETE FROM category WHERE category_id = :category_id");
@@ -103,11 +131,28 @@ class admin extends connection
         $query->execute();
     }
 
-    public function get_categories()
+    //admin: get courses with a delete button
+    public function get_course()
     {
-        $query = $this->conn->prepare("SELECT * FROM category ORDER BY category_name ASC");
+        $query = $this->conn->prepare("SELECT * FROM course");
         $query->execute();
-        $categories = $query->fetchAll();
-        return $categories;
+        $courses = $query->fetchAll();
+
+        if (is_array($courses) && !empty($courses)) {
+            echo "<div class='courses-box'>";
+            foreach ($courses as $course) {
+                echo "<div class='course_card'>";
+                echo "<h3>" . $course['title'] . "</h3>";
+                echo "<p>By: " . $course['username'] . "</p>";
+                echo "<img src='" . $course['course_image'] . "'>";
+                echo "<div class='course-actions'>";
+                echo "<a href='process/delete_course.process.php?course_id=" . $course['course_id'] . "' class='delete-btn'>Delete</a>";
+                echo "</div>";
+                echo "</div>";
+            }
+            echo "</div>";
+        } else {
+            echo "<div class='no-courses'>No courses found</div>";
+        }
     }
 }

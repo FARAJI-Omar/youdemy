@@ -40,44 +40,19 @@ require_once 'classes/login.cl.php';
                 <div class="content_container" id="courses_container">
                     <div class="categories-container">
                         <div class="categories-section">
-                            <h3>All Categories</h3>
-                            <div class="categories-list">
-                                <?php
-                                $admin = new admin();
-                                $categories = $admin->get_categories();
-                                if ($categories) {
-                                    foreach ($categories as $category) {
-                                        echo '<span class="category-tag">' . $category['category_name'] . '</span>';
-                                    }
-                                } else {
-                                    echo '<p class="no-categories">No categories found</p>';
-                                }
-                                ?>
-                            </div>
-                        </div>
-
-                        <div class="categories-section">
                             <h3>Add Category</h3>
                             <form action="process/create_category.process.php" method="POST" class="add-category-form">
-                                <input type="text" name="category_name" placeholder="Enter category name..." required>
-                                <button type="submit" class="add-btn">Add Category</button>
+                                <input type="text" name="category_name" placeholder="Enter category name..." class="add_category_input" required>
+                                <input value="Add Category" href="process/create_category.process.php" type="submit" class="add_btn">
                             </form>
                         </div>
 
                         <div class="categories-section">
-                            <h3>Delete Categories</h3>
+                            <h3>Delete Category</h3>
                             <div class="categories-list delete-mode">
-                                <?php
-                                if ($categories) {
-                                    foreach ($categories as $category) {
-                                        echo '<div class="category_tag_delete">';
-                                        echo '<span class="category_tag_d">' . $category['category_name'] .
-                                            '<a href="process/delete_category.process.php?category_id=' . $category['category_id'] . '" id="delete_cat_btn">×</a></span>';
-                                        echo '</div>';
-                                    }
-                                } else {
-                                    echo '<p class="no-categories">No categories to delete</p>';
-                                }
+                            <?php
+                                $admin = new admin();
+                                $categories = $admin->get_categories();
                                 ?>
                             </div>
                         </div>
@@ -87,11 +62,6 @@ require_once 'classes/login.cl.php';
             </div>
         </div>
     </div>
-
-
-
-
-
 
     <?php include 'footer.php'; ?>
 </body>

@@ -1,7 +1,6 @@
 <?php
 require_once 'classes/admin.cl.php';
-require_once 'classes/login.cl.php';
-require_once 'classes/admin_get_courses.cl.php';   
+require_once 'classes/login.cl.php';   
 ?>
 
 <!DOCTYPE html>
@@ -38,8 +37,8 @@ require_once 'classes/admin_get_courses.cl.php';
                 </div>
                 <div class="content_container" id="courses_container">
                     <div class="courses_container">
-                        <?php $admin_get_courses = new admin_get_courses();
-                        $admin_get_courses->get_courses();
+                        <?php $admin = new admin();
+                        $admin->get_course();
                         ?>
                     </div>
                 </div>

@@ -1,10 +1,10 @@
 <?php
 session_start();
-require_once '../classes/course.cl.php';
+require_once '../classes/user.cl.php';
 
 if (isset($_GET['course_id'])) {
-    $course = new course();
-    $course->delete_course($_GET['course_id']);
+    $user = new user();
+    $user->delete_course($_GET['course_id']);
 
     if (isset($_SESSION['user_role'])) {
         switch ($_SESSION['user_role']) {

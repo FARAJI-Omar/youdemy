@@ -926,7 +926,9 @@ aside a:hover, .admin-name:hover{
     background: #f5f5f5;
     border-radius: 6px;
     height: 40px;
-    overflow-y: scroll;
+    overflow: scroll;
+    border: 1px solid #0e3c6e;
+    padding-top: 25px;
 }
 /* hide scrollbar */
 .categories-list::-webkit-scrollbar {
@@ -939,6 +941,7 @@ aside a:hover, .admin-name:hover{
     padding: 5px 20px;
     border-radius: 5px;
     font-size: 15px;
+    margin-right: 10px;
 }
 
 /* Add Category Section */
@@ -947,31 +950,33 @@ aside a:hover, .admin-name:hover{
     gap: 10px;
 }
 
-.add-category-form input {
+.add-category-form .add_category_input {
     flex: 1;
     padding: 8px 15px;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 14px;
+    border: 1px solid #0e3c6e;
 }
 
-.add-category-form input:focus {
+.add-category-form .add_category_input:focus {
     outline: none;
-    border-color: #4CAF50;
+    border: 2px solid #4CAF50;
 }
 
-.add-btn {
+.add_btn {
     background: #4CAF50;
     color: white;
     border: none;
+    text-decoration: none;
     padding: 8px 20px;
     border-radius: 4px;
     cursor: pointer;
     transition: background 0.3s ease;
 }
 
-.add-btn:hover {
-    background: #45a049;
+.add_btn:hover {
+    background: #26752a;
 }
 
 /* Delete Categories Section */
@@ -986,7 +991,6 @@ aside a:hover, .admin-name:hover{
 
 /* Update the delete categories section styles */
 .categories-list.delete-mode {
-    width: 90%;
     height: 40px;
     overflow-y: scroll;
 }
@@ -997,6 +1001,7 @@ aside a:hover, .admin-name:hover{
     padding: 5px 20px;
     border-radius: 5px;
     margin-bottom: 10px;
+    margin-right: 10px;
     font-size: 15px;
 }
 
@@ -1031,7 +1036,7 @@ aside a:hover, .admin-name:hover{
     background-color: red !important;
     width: 45px !important;
     height: 10px !important;
-    margin-right: 6px;
+    margin-right: 17px;
     margin-top: 10px;
 }
 

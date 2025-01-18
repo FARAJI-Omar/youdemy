@@ -37,7 +37,7 @@ require_once 'classes/login.cl.php';
                 </div>
                 <div class="content_container" id="courses_container">
                     <div class="">
-                        <h2>Tags</h2>
+                        <!-- here -->
                     </div>
                 </div>
               
