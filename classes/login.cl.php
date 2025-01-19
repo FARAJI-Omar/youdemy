@@ -1,5 +1,5 @@
 <?php
-require_once 'classes/db.php';
+require_once 'db.php';
 session_start();
 
 class login extends connection
@@ -24,14 +24,13 @@ class login extends connection
                 if ($user['user_role'] === 'admin') {
                     header('location: admin_dashboard.php');
                     exit();
-                }elseif ($user['user_role'] === 'teacher') {
+                } elseif ($user['user_role'] === 'teacher') {
                     header('location: teacher_dashboard.php');
                     exit();
-                }elseif ($user['user_role'] === 'student') {
+                } elseif ($user['user_role'] === 'student') {
                     header('location: student_dashboard.php');
                     exit();
-                }
-                else {
+                } else {
                     header('location: index.php');
                     exit();
                 }
@@ -55,4 +54,3 @@ class login extends connection
         echo $user;
     }
 }
-?>
