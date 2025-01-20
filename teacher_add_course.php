@@ -1,6 +1,7 @@
 <?php
 require_once 'classes/login.cl.php';
 require_once 'classes/teacher.cl.php';
+$error_message = "";
 ?>
 
 <?php
@@ -8,7 +9,7 @@ require_once 'classes/teacher.cl.php';
 if (isset($_GET['message'])) {
     echo "<div class='message_box'>" . htmlspecialchars($_GET['message']) . "</div>";
     //add a delay of 2 seconds and remove the message
-    echo "<script>setTimeout(() => { window.location.href = 'teacher_dashboard.php'; }, 2000);</script>";
+    echo "<script>setTimeout(() => { window.location.href = 'teacher_add_course.php'; }, 3000);</script>";
 }
 ?>
 
@@ -46,10 +47,15 @@ if (isset($_GET['message'])) {
             <div class="content-section" id="welcome">
                 <h1>Create a new course</h1>
                 <p class="create_course_text">Fill in the details below to create a new course</p>
-                <form action="process/teacher_add_course.process.php" method="post" class="create_course_form">
+
+                    <form action="process/teacher_add_course.process.php" method="post" class="create_course_form">
+
                     <input type="text" name="title" placeholder="Course title" required>
+
                     <textarea type="text" name="description" placeholder="Course description" required></textarea>
+
                     <input type="url" name="image" id="image" placeholder="Course image URL" required>
+
                     <select name="category" id="category" required>
                         <option value="0">Select a category</option>
                         <?php
@@ -57,30 +63,36 @@ if (isset($_GET['message'])) {
                         $teacher->get_categories();
                         ?>
                     </select>
+
                     <select id="tags" name="tags[]" multiple required>
                         <?php
                         $teacher = new Teacher();
                         $teacher->get_tags();
                         ?>
                     </select>
+
                     <select name="course-type" id="course-type" onchange="showInput(this.value)" required>
                         <option value="0" disabled selected>Course Type</option>
                         <option value="video">Video Course</option>
                         <option value="text">Text Course</option>
                     </select>
+
                     <div id="video-input" style="display: none;">
                         <input type="url" name="video-url" placeholder="Video URL" style="width: 100%;">
+                        <?php if (isset($error_message)) {
+                            echo "<p class='error-message'>$error_message</p>";
+                        } ?>
                     </div>
+
                     <div id="text-input" style="display: none;">
-                        <input type="file" name="pdf-url" placeholder="PDF URL">
+                        <textarea type="text" name="text_course" placeholder="Enter text here" style="width: 100%; height: 200px;"></textarea>
                     </div>
                     <div class="create_course_btn">
                         <a href="teacher_add_course.php" class="create_course_btn">Cancel</a>
                         <input type="submit" name="create_course" value="Create course">
                     </div>
-                </form>
+                    </form>                
             </div>
-
         </div>
     </div>
     <?php include 'footer.php'; ?>
