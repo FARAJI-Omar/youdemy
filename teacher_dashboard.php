@@ -15,7 +15,6 @@ require_once 'classes/user.cl.php';
 <body>
     <div class="admin-header">
         <?php include 'header.php';?>
-        
     </div>
 
     <div class="admin_body">

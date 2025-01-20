@@ -61,9 +61,12 @@ class Teacher extends User
 
     public function get_courses()
     {
-        $query = $this->conn->prepare("SELECT course.*, student.username
-                                        FROM course
-                                        LEFT JOIN course_student AS student ON course.course_id = student.course_id");
+        $query = $this->conn->prepare("
+            SELECT course.*, GROUP_CONCAT(student.username) AS enrolled_students
+            FROM course
+            LEFT JOIN course_student AS student ON course.course_id = student.course_id
+            GROUP BY course.course_id
+        ");
         $query->execute();
         $courses = $query->fetchAll();
 
@@ -82,11 +85,22 @@ class Teacher extends User
                   <tbody>";
             foreach ($courses as $course) {
                 echo "<tr>";
-                echo "<td>" . htmlspecialchars($course['title']) . "</td>";
+                echo "<div class='course-row'>";
+                echo "<td>" . htmlspecialchars($course['title']) . " <br><br> <p style='font-size:10px;'>" . htmlspecialchars($course['created_at']) . "</p></td>";
+                echo "</div>";
                 echo "<td><img src='" . htmlspecialchars($course['course_image']) . "' alt='Course Image' style='width:100%; height:90px;'></td>";
                 echo "<td>" . htmlspecialchars($course['description']) . "</td>";
                 echo "<td>" . htmlspecialchars($course['category_name']) . "</td>";
-                echo "<td>" . htmlspecialchars($course['username'] ?? 'No students enrolled') . "</td>";
+                echo "<td>";
+                $enrolled_students = explode(',', $course['enrolled_students']);
+                if (!empty($enrolled_students)) {
+                    echo "<ul>";
+                    foreach ($enrolled_students as $student) {
+                        echo "<li>" . htmlspecialchars($student) . "</li>";
+                    }
+                    echo "</ul>";
+                }
+                echo "</td>";
                 echo "<td>
                         <div class='course_actions'>
                             <a href='process/delete_course.process.php?course_id=" . htmlspecialchars($course['course_id']) . "' class='delete-btn'>Delete</a>
@@ -104,7 +118,7 @@ class Teacher extends User
     public function edit_course($course_id, $title, $description, $category, $image, $tags, $username, $video_content, $text_content)
     {
         $this->conn->beginTransaction();
-        
+
         $query = $this->conn->prepare("UPDATE course SET title = :title, description = :description, category_name = :category, course_image = :image, username = :username, video_content = :video_content, text_content = :text_content WHERE course_id = :course_id");
         $query->bindParam(':title', $title);
         $query->bindParam(':description', $description);
@@ -116,13 +130,23 @@ class Teacher extends User
         $query->bindParam(':course_id', $course_id);
         $query->execute();
 
-
-        $query = $this->conn->prepare("UPDATE course_tag SET tag_id = :tag_id WHERE course_id = :course_id");
-        $query->bindParam(':tag_id', $tags);
-        $query->bindParam(':course_id', $course_id);
-        $query->execute();
+        foreach ($tags as $tag) {
+            $query = $this->conn->prepare("UPDATE course_tag SET tag_id = :tag_id WHERE course_id = :course_id");
+            $query->bindParam(':tag_id', $tag);
+            $query->bindParam(':course_id', $course_id);
+            $query->execute();
+        }
 
         $this->conn->commit();
     }
 
+    public function get_course_title($course_id)
+    {
+        $stmt = "SELECT title from course where course_id = :course_id";
+        $query = $this->conn->prepare($stmt);
+        $query->bindParam(":course_id", $course_id);
+        $query->execute();
+        $course = $query->fetch();
+        echo $course['title'];
+    }
 }
