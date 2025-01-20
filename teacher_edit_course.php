@@ -7,8 +7,8 @@ $error_message = "";
 <?php
 if (isset($_GET['message'])) {
     echo "<div class='message_box'>" . htmlspecialchars($_GET['message']) . "</div>";
-    //add a delay of 2 seconds and remove the message
-    echo "<script>setTimeout(() => { window.location.href = 'teacher_add_course.php'; }, 3000);</script>";
+    //add a delay of 3 seconds and remove the message
+    echo "<script>setTimeout(() => { window.location.href = 'teacher_manage_courses.php'; }, 3000);</script>";
 }
 ?>
 
@@ -21,9 +21,10 @@ if (isset($_GET['message'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
     <link rel="stylesheet" href="styles.css">
-    <title>Teacher Dashboard</title>
+    <title>Edit Course</title>
 </head>
 
+<body>
 <body>
     <div class="admin-header">
         <?php include 'header.php'; ?>
@@ -44,10 +45,10 @@ if (isset($_GET['message'])) {
 
         <div class="main-container">
             <div class="content-section" id="welcome">
-                <h1>Create a new course</h1>
-                <p class="create_course_text">Fill in the details below to create a new course</p>
+                <h1>Edit course</h1>
+                <p class="create_course_text">Fill in the details below to edit the course: <?php echo $_GET['title']; ?></p>
 
-                    <form action="process/teacher_add_course.process.php" method="post" class="create_course_form">
+                    <form action="process/teacher_edit_course.process.php?course_id=<?php echo $_GET['course_id']; ?>" method="post" class="create_course_form">
 
                     <input type="text" name="title" placeholder="Course title" required>
 
@@ -119,6 +120,7 @@ if (isset($_GET['message'])) {
             searchPlaceholderValue: "Search tags"
         });
     </script>
+</body>
 </body>
 
 </html>

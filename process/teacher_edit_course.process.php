@@ -2,6 +2,7 @@
 require_once '../classes/teacher.cl.php';
 require_once '../classes/user.cl.php';
 
+$course_id = $_GET['course_id'];
 //validate image URL
 $image_valid = false;
 if (!empty($_POST['image'])) {
@@ -46,7 +47,8 @@ if (isset($_POST['course-type'])
             exit();
 
         } else {
-            $teacher->add_course($_POST['title'], 
+            $teacher->edit_course($course_id, 
+            $_POST['title'], 
             $_POST['description'],
             $_POST['category'], 
             $_POST['image'],
@@ -55,12 +57,13 @@ if (isset($_POST['course-type'])
             $_POST['video-url'], 
             null);
 
-            $message = "Course added successfully";
+            $message = "Course modified successfully";
             header("Location: ../teacher_add_course.php?message=$message");
             exit();
         }
     } elseif ($_POST['course-type'] == 'text') {
-        $teacher->add_course($_POST['title'], 
+        $teacher->edit_course($course_id, 
+                            $_POST['title'], 
                             $_POST['description'], 
                             $_POST['image'],
                             $_POST['category'], 
@@ -69,12 +72,12 @@ if (isset($_POST['course-type'])
                             null, 
                             $_POST['text_course']);
 
-        $message = "Course added successfully";
+        $message = "Course modified successfully";
         header("Location: ../teacher_add_course.php?message=$message");
         exit();
     }
 } else {
-    $message = "Course addition failed";
+    $message = "Course modification failed";
 }
 
 header("Location: ../teacher_add_course.php?message=$message");

@@ -1,5 +1,5 @@
 <?php
-require_once 'classes/login.cl.php';
+require_once 'classes/user.cl.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

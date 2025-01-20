@@ -1,6 +1,6 @@
 <?php
 require_once 'classes/admin.cl.php';
-require_once 'classes/login.cl.php';
+require_once 'classes/user.cl.php';
 ?>
 
 

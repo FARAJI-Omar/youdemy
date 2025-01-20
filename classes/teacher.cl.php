@@ -90,7 +90,7 @@ class Teacher extends User
                 echo "<td>
                         <div class='course_actions'>
                             <a href='process/delete_course.process.php?course_id=" . htmlspecialchars($course['course_id']) . "' class='delete-btn'>Delete</a>
-                            <a href='process/teacher_edit_course.process.php?course_id=" . htmlspecialchars($course['course_id']) . "' class='edit-btn'>Edit</a>
+                            <a href='teacher_edit_course.php?course_id=" . htmlspecialchars($course['course_id']) . "' class='edit-btn'>Edit</a>
                         </div>
                       </td>";
                 echo "</tr>";
@@ -100,4 +100,29 @@ class Teacher extends User
             echo "<div class='no-courses'>No courses found</div>";
         }
     }
+
+    public function edit_course($course_id, $title, $description, $category, $image, $tags, $username, $video_content, $text_content)
+    {
+        $this->conn->beginTransaction();
+        
+        $query = $this->conn->prepare("UPDATE course SET title = :title, description = :description, category_name = :category, course_image = :image, username = :username, video_content = :video_content, text_content = :text_content WHERE course_id = :course_id");
+        $query->bindParam(':title', $title);
+        $query->bindParam(':description', $description);
+        $query->bindParam(':category', $category);
+        $query->bindParam(':image', $image);
+        $query->bindParam(':username', $username);
+        $query->bindParam(':video_content', $video_content);
+        $query->bindParam(':text_content', $text_content);
+        $query->bindParam(':course_id', $course_id);
+        $query->execute();
+
+
+        $query = $this->conn->prepare("UPDATE course_tag SET tag_id = :tag_id WHERE course_id = :course_id");
+        $query->bindParam(':tag_id', $tags);
+        $query->bindParam(':course_id', $course_id);
+        $query->execute();
+
+        $this->conn->commit();
+    }
+
 }
