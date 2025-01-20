@@ -33,14 +33,16 @@ class Teacher extends User
         }
     }
 
-    public function add_course($title, $description, $category, $tags, $username, $video_content, $text_content)
+    public function add_course($title, $description, $category, $image, $tags, $username, $video_content, $text_content)
     {
         $this->conn->beginTransaction();
 
-        $query = $this->conn->prepare("INSERT INTO course (title, description, category_name, username, video_content, text_content) VALUES (:title, :description, :category, :username, :video_content, :text_content)");
+        $query = $this->conn->prepare("INSERT INTO course (title, description, category_name, course_image, username, video_content, text_content) 
+                                        VALUES (:title, :description, :category, :image, :username, :video_content, :text_content)");
         $query->bindParam(':title', $title);
         $query->bindParam(':description', $description);
         $query->bindParam(':category', $category);
+        $query->bindParam(':image', $image);
         $query->bindParam(':username', $username);
         $query->bindParam(':video_content', $video_content);
         $query->bindParam(':text_content', $text_content);
@@ -81,15 +83,12 @@ class Teacher extends User
             foreach ($courses as $course) {
                 echo "<tr>";
                 echo "<td>" . htmlspecialchars($course['title']) . "</td>";
-                echo "<td><img src='" . htmlspecialchars($course['course_image']) . "' alt='Course Image' style='width:100px;'></td>";
+                echo "<td><img src='" . htmlspecialchars($course['course_image']) . "' alt='Course Image' style='width:100%; height:90px;'></td>";
                 echo "<td>" . htmlspecialchars($course['description']) . "</td>";
                 echo "<td>" . htmlspecialchars($course['category_name']) . "</td>";
                 echo "<td>" . htmlspecialchars($course['username'] ?? 'No students enrolled') . "</td>";
                 echo "<td>
-                        <div class='course_actions'>
-                            <a href='process/delete_course.process.php?course_id=" . htmlspecialchars($course['course_id']) . "' class='delete-btn'>Delete</a>
-                            <a href='process/edit_course.process.php?course_id=" . htmlspecialchars($course['course_id']) . "' class='edit-btn'>Edit</a>
-                        </div>
+                      
                       </td>";
                 echo "</tr>";
             }

@@ -33,7 +33,8 @@ if ($_POST['course-type'] == 'text') {
 
 if (isset($_POST['course-type']) 
     && !empty($_POST['course-type']) 
-    && !empty($_POST['category']) 
+    && !empty($_POST['category'])
+    && !empty($_POST['image'])
     && !empty($_POST['tags'])){
 
     $teacher = new Teacher();
@@ -46,8 +47,9 @@ if (isset($_POST['course-type'])
 
         } else {
             $teacher->add_course($_POST['title'], 
-            $_POST['description'], 
+            $_POST['description'],
             $_POST['category'], 
+            $_POST['image'],
             $_POST['tags'], 
             $_SESSION['username'], 
             $_POST['video-url'], 
@@ -60,6 +62,7 @@ if (isset($_POST['course-type'])
     } elseif ($_POST['course-type'] == 'text') {
         $teacher->add_course($_POST['title'], 
                             $_POST['description'], 
+                            $_POST['image'],
                             $_POST['category'], 
                             $_POST['tags'], 
                             $_SESSION['username'], 

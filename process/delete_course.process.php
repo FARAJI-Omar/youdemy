@@ -14,11 +14,11 @@ if (isset($_GET['course_id'])) {
                 break;
             case 'teacher':
                 $message = "Course deleted successfully";
-                header('Location: ../teacher_dash_courses.php');
+                header("Location: ../teacher_manage_courses.php?message=$message");
                 break;
             case 'student':
                 $message = "Course deleted successfully";
-                header('Location: ../student_dash_courses.php');
+                header("Location: ../student_dash_courses.php?message=$message");
                 break;
             default:
                 header('Location: ../index.php');
@@ -26,9 +26,5 @@ if (isset($_GET['course_id'])) {
     } else {
         header('Location: ../index.php');
     }
-    exit();
-} else {
-    $message = "Invalid request";
-    header("Location: ../admin_dash_courses.php?message=$message");
     exit();
 }

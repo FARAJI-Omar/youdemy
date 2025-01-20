@@ -1,7 +1,15 @@
 <?php
 require_once 'classes/login.cl.php';
 require_once 'classes/teacher.cl.php';
-require_once 'classes/user.cl.php';
+$error_message = "";
+?>
+
+<?php 
+if (isset($_GET['message'])) {
+    echo "<div class='message_box'>" . htmlspecialchars($_GET['message']) . "</div>";
+    //add a delay of 2 seconds and remove the message
+    echo "<script>setTimeout(() => { window.location.href = 'teacher_manage_courses.php'; }, 3000);</script>";
+}
 ?>
 
 <!DOCTYPE html>
@@ -35,10 +43,14 @@ require_once 'classes/user.cl.php';
             <div class="content_sec">
                 <h1>Manage Courses</h1>
 
+                <?php if (!empty($error_message)): ?>
+                    <div class="error-message"><?php echo htmlspecialchars($error_message); ?></div>
+                <?php endif; ?>
+
                 <div class="courses-table">
-                    <?php 
+                    <?php
                     $teacher = new teacher();
-                    $teacher->get_courses(); 
+                    $teacher->get_courses();
                     ?>
                 </div>
             </div>

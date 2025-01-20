@@ -7,7 +7,7 @@ require_once 'classes/login.cl.php';
 if (isset($_GET['message'])) {
     echo "<div class='message_box'>" . htmlspecialchars($_GET['message']) . "</div>";
     //add a delay of 2 seconds and remove the message
-    echo "<script>setTimeout(() => { window.location.href = 'admin_dash_courses.php'; }, 2000);</script>";
+    echo "<script>setTimeout(() => { window.location.href = 'admin_dash_courses.php'; }, 3000);</script>";
 }
 ?>
 

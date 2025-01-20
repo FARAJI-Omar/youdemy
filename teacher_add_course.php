@@ -5,7 +5,6 @@ $error_message = "";
 ?>
 
 <?php
-// Display the message if set
 if (isset($_GET['message'])) {
     echo "<div class='message_box'>" . htmlspecialchars($_GET['message']) . "</div>";
     //add a delay of 2 seconds and remove the message
