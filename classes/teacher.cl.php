@@ -88,7 +88,10 @@ class Teacher extends User
                 echo "<td>" . htmlspecialchars($course['category_name']) . "</td>";
                 echo "<td>" . htmlspecialchars($course['username'] ?? 'No students enrolled') . "</td>";
                 echo "<td>
-                      
+                        <div class='course_actions'>
+                            <a href='process/delete_course.process.php?course_id=" . htmlspecialchars($course['course_id']) . "' class='delete-btn'>Delete</a>
+                            <a href='process/teacher_edit_course.process.php?course_id=" . htmlspecialchars($course['course_id']) . "' class='edit-btn'>Edit</a>
+                        </div>
                       </td>";
                 echo "</tr>";
             }
