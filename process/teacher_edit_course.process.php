@@ -3,6 +3,7 @@ require_once '../classes/teacher.cl.php';
 require_once '../classes/user.cl.php';
 
 $course_id = $_GET['course_id'];
+
 //validate image URL
 $image_valid = false;
 if (!empty($_POST['image'])) {

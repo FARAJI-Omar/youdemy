@@ -46,8 +46,7 @@ if (isset($_GET['message'])) {
         <div class="main-container">
             <div class="content-section" id="welcome">
                 <h1>Edit course</h1>
-                <p class="create_course_text">Fill in the details below to edit the course: <?php echo $_GET['title']; ?></p>
-
+                <p class="create_course_text">Fill in the details below to edit the course: <?php $teacher = new Teacher();  $teacher->get_course_title($_GET['course_id']); ?></p>
                     <form action="process/teacher_edit_course.process.php?course_id=<?php echo $_GET['course_id']; ?>" method="post" class="create_course_form">
 
                     <input type="text" name="title" placeholder="Course title" required>
@@ -89,7 +88,7 @@ if (isset($_GET['message'])) {
                     </div>
                     <div class="create_course_btn">
                         <a href="teacher_add_course.php" class="create_course_btn">Cancel</a>
-                        <input type="submit" name="create_course" value="Create course">
+                        <input type="submit" name="edit_course" value="Edit course">
                     </div>
                     </form>                
             </div>
