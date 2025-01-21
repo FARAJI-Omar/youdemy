@@ -47,7 +47,7 @@ if (isset($_GET['message'])) {
                 <div class="content_container" id="courses_container">
                     <div class="courses_container">
                         <?php $admin = new admin();
-                        $admin->get_course();
+                        $admin->get_courses();
                         ?>
                     </div>
                 </div>

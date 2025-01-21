@@ -132,7 +132,7 @@ class admin extends user {
     }
 
     //admin: get courses with a delete button
-    public function get_course()
+    public function get_courses()
     {
         $query = $this->conn->prepare("SELECT * FROM course");
         $query->execute();
