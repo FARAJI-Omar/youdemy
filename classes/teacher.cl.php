@@ -62,11 +62,12 @@ class Teacher extends User
     public function get_courses()
     {
         $query = $this->conn->prepare("
-            SELECT course.*, GROUP_CONCAT(student.username) AS enrolled_students
-            FROM course
-            LEFT JOIN course_student AS student ON course.course_id = student.course_id
-            GROUP BY course.course_id
-        ");
+                SELECT course.*, GROUP_CONCAT(student.username) AS enrolled_students
+                FROM course
+                LEFT JOIN course_student AS student ON course.course_id = student.course_id where course.username = :username
+                GROUP BY course.course_id");
+
+        $query->bindParam(':username', $_SESSION['username']);
         $query->execute();
         $courses = $query->fetchAll();
 
