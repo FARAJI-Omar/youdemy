@@ -2,15 +2,20 @@
 require_once 'classes/db.php';
 require_once 'classes/user.cl.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $confirmPassword = $_POST['confirmPassword'];
-    $role = $_POST['role'];
+$register = new user();
+$msg_r = "";
 
-    $register = new user();
-    $register->registerUser ($username, $email, $password, $confirmPassword, $role);
-    header('Location: login.php?success=registered');
-    exit();
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
+    $username = htmlspecialchars($_POST['username']);
+    $email = htmlspecialchars($_POST['email']);
+    $password = htmlspecialchars($_POST['password']);
+    $confirmPassword = htmlspecialchars($_POST['confirmPassword']);
+    $role = htmlspecialchars($_POST['role']);
+
+    if ($register->registerUser($username, $email, $password, $confirmPassword, $role)) {
+        header('Location: login.php?success=registered');
+        exit();
+    } else {
+        $msg_error = $register->register_error;
+    }
 }
