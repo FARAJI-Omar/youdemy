@@ -19,7 +19,7 @@ require_once 'classes/student.cl.php';
             <img src="img/User profile.png" class="admin-profile">
             <a href="student_dashboard.php" style="text-decoration: none;"><h3 class="admin-name"><?php echo $_SESSION['username'];?></h3></a>
             <a href="all_courses.php">View courses</a>
-            <a href="student_courses.php">My courses</a>
+            <a href="my_courses.php">My courses</a>
             <a href="process/logout.php">Logout</a>
         </aside>
 

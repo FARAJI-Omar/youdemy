@@ -59,18 +59,25 @@ class Teacher extends User
         $this->conn->commit();
     }
 
-    public function get_courses()
+    public function get_courses($page = 1, $limit = 6)
     {
-        $query = $this->conn->prepare("
-                SELECT course.*, GROUP_CONCAT(student.username) AS enrolled_students
-                FROM course
-                LEFT JOIN course_student AS student ON course.course_id = student.course_id where course.username = :username
-                GROUP BY course.course_id");
-
-        $query->bindParam(':username', $_SESSION['username']);
+        // Start a transaction
+        $this->conn->beginTransaction();
+    
+        // Step 1: Get teacher's username from the session
+        $query = $this->conn->prepare("SELECT username FROM user WHERE user_id = :user_id");
+        $query->bindParam(':user_id', $_SESSION['user_id']);
+        $query->execute();
+        $teacher = $query->fetch();
+        $teacher = $teacher['username'];
+    
+        // Step 2: Get courses for the teacher
+        $query = $this->conn->prepare("SELECT * FROM course WHERE username = :teacher");
+        $query->bindParam(':teacher', $teacher);
         $query->execute();
         $courses = $query->fetchAll();
-
+    
+        // Initialize table output if courses exist
         if (is_array($courses) && !empty($courses)) {
             echo "<table class='courses-table'>";
             echo "<thead>
@@ -84,7 +91,20 @@ class Teacher extends User
                     </tr>
                   </thead>
                   <tbody>";
+    
             foreach ($courses as $course) {
+                // Step 3: Get enrolled students for the current course
+                $query = $this->conn->prepare("
+                    SELECT user.username 
+                    FROM course_student
+                    JOIN user ON course_student.user_id = user.user_id
+                    WHERE course_student.course_id = :course_id
+                ");
+                $query->bindParam(':course_id', $course['course_id']);
+                $query->execute();
+                $students = $query->fetchAll();
+    
+                // Render course row
                 echo "<tr>";
                 echo "<div class='course-row'>";
                 echo "<td>" . htmlspecialchars($course['title']) . " <br><br> <p style='font-size:10px;'>" . htmlspecialchars($course['created_at']) . "</p></td>";
@@ -93,13 +113,14 @@ class Teacher extends User
                 echo "<td>" . htmlspecialchars($course['description']) . "</td>";
                 echo "<td>" . htmlspecialchars($course['category_name']) . "</td>";
                 echo "<td>";
-                $enrolled_students = explode(',', $course['enrolled_students']);
-                if (!empty($enrolled_students)) {
+                if (!empty($students)) {
                     echo "<ul>";
-                    foreach ($enrolled_students as $student) {
-                        echo "<li>" . htmlspecialchars($student) . "</li>";
+                    foreach ($students as $student) {
+                        echo "<li>" . htmlspecialchars($student['username']) . "</li>";
                     }
                     echo "</ul>";
+                } else {
+                    echo "No students enrolled";
                 }
                 echo "</td>";
                 echo "<td>
@@ -114,7 +135,11 @@ class Teacher extends User
         } else {
             echo "<div class='no-courses'>No courses found</div>";
         }
+    
+        // Commit transaction
+        $this->conn->commit();
     }
+    
 
     public function edit_course($course_id, $title, $description, $category, $image, $tags, $username, $video_content, $text_content)
     {

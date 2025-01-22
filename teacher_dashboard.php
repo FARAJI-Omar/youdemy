@@ -23,7 +23,6 @@ require_once 'classes/user.cl.php';
             <a href="teacher_dashboard.php" style="text-decoration: none;"><h3 class="admin-name"><?php echo $_SESSION['username'];?></h3></a>
             <a href="teacher_add_course.php">Add new course</a>
             <a href="teacher_manage_courses.php">Manage courses</a>
-            <a href="teacher_statistics.php">Statistics</a>
             <a href="process/logout.php">Logout</a>
         </aside>
 

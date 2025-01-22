@@ -39,7 +39,6 @@ if (isset($_GET['message'])) {
             </a>
             <a href="teacher_add_course.php">Add new course</a>
             <a href="teacher_manage_courses.php">Manage courses</a>
-            <a href="teacher_statistics.php">Statistics</a>
             <a href="process/logout.php">Logout</a>
         </aside>
 

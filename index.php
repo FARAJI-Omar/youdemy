@@ -70,7 +70,7 @@ require_once 'classes/user.cl.php';
 
             <div class="course-card">
                 <div class="course-image">
-                    <img src="img/online-programming-course-01.jpg" alt="CSS Course">
+                    <img src="img/course2.jpg" alt="CSS Course">
                 </div>
                 <div class="course-content">
                     <span class="course-category">FRONT END</span>
@@ -89,7 +89,7 @@ require_once 'classes/user.cl.php';
 
             <div class="course-card">
                 <div class="course-image">
-                    <img src="img/online-programming-course-01.jpg" alt="React Course">
+                    <img src="img/course3.jpg" alt="React Course">
                 </div>
                 <div class="course-content">
                     <span class="course-category">FRONT END</span>

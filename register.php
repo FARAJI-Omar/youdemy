@@ -23,7 +23,7 @@ require_once 'process/register.process.php';
 
             <?php if (!empty($msg_error)): ?>
                 <div class="error-message">
-                    <?= htmlspecialchars($msg_error); ?>
+                <?php echo "<p style='color: red;'>" . htmlspecialchars($msg_error) . "</p>"; ?>
                 </div>
             <?php endif; ?>
 
