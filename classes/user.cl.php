@@ -1,7 +1,8 @@
 <?php
 require_once 'db.php';
 session_start();
-class user {
+class user
+{
     private $db;
     protected $conn;
 
@@ -70,7 +71,7 @@ class user {
                 $this->register_error = "An error occurred during registration.";
                 return false;
             }
-        }else {
+        } else {
             $query = $this->conn->prepare("INSERT INTO user (username, email, password, user_role) VALUES (:username, :email, :password, :role)");
             $query->bindParam(":username", $username);
             $query->bindParam(":email", $email);
@@ -86,9 +87,6 @@ class user {
         }
     }
 
-    // Login
-    public $login_error = "";
-
     public function login($email, $password)
     {
         $query = $this->conn->prepare("SELECT * FROM user WHERE email = :email");
@@ -96,34 +94,35 @@ class user {
         $query->execute();
         $user = $query->fetch();
 
-        if ($query->rowCount() > 0) {
+        //check if user exists
+        if ($user) {
+            //verify the password
             if (password_verify($password, $user['password'])) {
-                $_SESSION['username'] = $user['username'];
-                $_SESSION['user_id'] = $user['user_id'];
-                $_SESSION['user_role'] = $user['user_role'];
-                $_SESSION["status"] = $user["status"];
-
-                // if the user role is admin
-                if ($user['user_role'] === 'admin') {
-                    header('location: admin_dashboard.php');
+                //check user status
+                if ($user['status'] === 'suspended') {
+                    //redirect to suspended page
+                    header("Location: suspended_page.php");
                     exit();
-                } elseif ($user['user_role'] === 'teacher') {
-                    header('location: teacher_dashboard.php');
-                    exit();
-                } elseif ($user['user_role'] === 'student') {
-                    header('location: student_dashboard.php');
-                    exit();
-                } else {
-                    header('location: index.php');
-                    exit();
+                } elseif ($user['status'] === 'active') {
+                    //set session variables and log in the user
+                    $_SESSION['user_id'] = $user['user_id'];
+                    $_SESSION['username'] = $user['username'];
+                    $_SESSION['user_role'] = $user['user_role'];
+                    $_SESSION["status"] = $user["status"];
+                    //redirect to the admin/teacher/student dashboard
+                    if ($user['user_role'] === 'admin') {
+                        header("Location: admin_dashboard.php");
+                    } elseif ($user['user_role'] === 'teacher') {
+                        header("Location: teacher_dashboard.php");
+                    } elseif ($user['user_role'] === 'student') {
+                        header("Location: student_dashboard.php");
+                    }
                 }
             } else {
-                $this->login_error = "Invalid email or password!";
-                return false;
+                return "Invalid email or password!";
             }
         } else {
-            $this->login_error = "Invalid email or password!";
-            return false;
+            return "Invalid email or password!";
         }
     }
 
@@ -137,9 +136,22 @@ class user {
         echo $user;
     }
 
-    public function get_courses()
+    public function get_courses($page = 1, $limit = 6)
     {
-        $query = $this->conn->prepare("SELECT * FROM course");
+        $offset = ($page - 1) * $limit; // Calculate the offset for the SQL query
+
+        $query = $this->conn->prepare("
+            SELECT course.*, GROUP_CONCAT(tag.tag_name) AS tags
+            FROM course
+            LEFT JOIN course_tag ON course.course_id = course_tag.course_id
+            LEFT JOIN tag ON course_tag.tag_id = tag.tag_id
+            GROUP BY course.course_id
+            LIMIT :limit OFFSET :offset
+        ");
+
+        // Bind parameters as integers
+        $query->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $query->bindParam(':offset', $offset, PDO::PARAM_INT);
         $query->execute();
         $courses = $query->fetchAll();
 
@@ -147,11 +159,14 @@ class user {
             echo "<div class='courses-box'>";
             foreach ($courses as $course) {
                 echo "<div class='course_card'>";
-                echo "<h3>" . $course['title'] . "</h3>";
-                echo "<p>By: " . $course['username'] . "</p>";
-                echo "<img src='" . $course['course_image'] . "'>";
+                echo "<h3>" . htmlspecialchars($course['title']) . "</h3>";
+                echo "<h5>" . 'By: ' . htmlspecialchars($course['username']) . "</h5>";
+                echo "<p>" . 'Category: ' . htmlspecialchars($course['category_name']) . "</p>";
+                echo "<img src='" . htmlspecialchars($course['course_image']) . "'>";
+                echo "<p><strong>Tags:</strong> " . htmlspecialchars($course['tags'] ? $course['tags'] : 'No tags') . "</p>";
+                echo "<p>" . htmlspecialchars(substr($course['description'], 0, 200)) . "...</p>";
                 echo "<div class='course-actions'>";
-                echo "<a href='process/delete_course.process.php?course_id=" . $course['course_id'] . "' class='delete-btn'>Delete</a>";
+                echo "<a href='course_details.php?course_id=" . $course['course_id'] . "' class='readmore'>Read more ⇨</a>";
                 echo "</div>";
                 echo "</div>";
             }
@@ -159,6 +174,13 @@ class user {
         } else {
             echo "<div class='no-courses'>No courses found</div>";
         }
+    }
+
+    public function get_total_courses()
+    {
+        $query = $this->conn->prepare("SELECT COUNT(*) FROM course");
+        $query->execute();
+        return $query->fetchColumn();
     }
 
     public function delete_course($course_id)
@@ -173,7 +195,7 @@ class user {
         $query = $this->conn->prepare("SELECT * FROM category ORDER BY category_name ASC");
         $query->execute();
         $categories = $query->fetchAll();
-        
+
         if (is_array($categories) && !empty($categories)) {
             echo "<div>";
             foreach ($categories as $category) {
@@ -184,6 +206,4 @@ class user {
             echo "</div>";
         }
     }
-
 }
-?>
