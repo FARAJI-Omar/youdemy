@@ -1,6 +1,11 @@
 <?php
 require_once 'classes/admin.cl.php';
 require_once 'classes/user.cl.php';
+
+if ($_SESSION['user_role'] !== 'admin') {
+    header("Location: index.php");
+    exit();
+}
 ?>
 
 <?php 

@@ -1,6 +1,11 @@
 <?php
 require_once 'classes/admin.cl.php';
 require_once 'classes/user.cl.php';
+
+if ($_SESSION['user_role'] !== 'admin') {
+    header("Location: index.php");
+    exit();
+}
 ?>
 
 <?php 
@@ -24,7 +29,9 @@ if (isset($_GET['message'])) {
 
 <body>
     <div class="admin-header">
-        <?php include 'header.php'; ?>
+        <?php include 'header.php'; 
+    ?>
+        
     </div>
 
     <div class="admin_body">

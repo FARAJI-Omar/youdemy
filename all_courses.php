@@ -1,6 +1,7 @@
 <?php
 require_once 'classes/user.cl.php';
 
+
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $limit = 6;
 $user = new user();

@@ -1,6 +1,11 @@
 <?php
 require_once 'classes/course.cl.php';
 require_once 'classes/student.cl.php';
+
+if ($_SESSION['user_role'] !== 'student') {
+    header("Location: index.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>

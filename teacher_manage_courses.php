@@ -1,6 +1,15 @@
 <?php
 require_once 'classes/user.cl.php';
 require_once 'classes/teacher.cl.php';
+
+if(!isset($_SESSION['user_id'])){
+    header("location: index.php");
+}elseif(isset($_SESSION['user_id'])){
+    if($_SESSION['user_role'] !== 'teacher'){
+        header("location: index.php");
+    }
+}
+
 $error_message = "";
 ?>
 

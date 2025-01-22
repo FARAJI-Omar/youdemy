@@ -1,5 +1,19 @@
 <?php
 require_once 'classes/student.cl.php';
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: index.php");
+        exit();
+}elseif(isset($_SESSION['user_id'])){
+    if($_SESSION['user_role'] !== 'student'){
+        header("Location: index.php");
+        exit();
+    }
+}else{
+    header("Location: index.php");
+    exit();
+}
+
 ?>
 
 
