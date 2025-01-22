@@ -35,17 +35,19 @@ class course{
                             echo "<p class='tag'>#" . htmlspecialchars($tag) . "</p>";
                         }
                 echo "</div>";
-                if($this->check_enrollment($detail['course_id'], $_SESSION['user_id'])){
-                    echo "<a class='enroll_btn'>Already enrolled</a>";
-                }else{
-                    echo "<a href='process/enroll_course.process.php?course_id=" . $detail['course_id'] . "' class='enroll_btn'>Enroll in this course</a>";
+                if(isset($_SESSION['user_id'])){
+                    if($this->check_enrollment($detail['course_id'], $_SESSION['user_id'])){
+                        echo "<a class='enroll_btn'>Already enrolled</a>";
+                    }else{
+                        echo "<a href='process/enroll_course.process.php?course_id=" . $detail['course_id'] . "' class='enroll_btn'>Enroll in this course</a>";
+                    }
                 }
                 echo "</div>";
         }
     
     }
 
-    //checj if student has enrolled in this course
+    //check if student has enrolled in this course
     public function check_enrollment($course_id, $user_id){
         $query = $this->conn->prepare("SELECT * FROM course_student WHERE course_id = :course_id AND user_id = :user_id");
         $query->bindParam(':course_id', $course_id);
