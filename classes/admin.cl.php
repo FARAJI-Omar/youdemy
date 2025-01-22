@@ -1,6 +1,7 @@
 <?php
 require_once 'user.cl.php';
-class admin extends user {
+class admin extends user
+{
     protected $conn;
 
     public function __construct()
@@ -108,13 +109,13 @@ class admin extends user {
         $query = $this->conn->prepare("SELECT * FROM category ORDER BY category_name ASC");
         $query->execute();
         $categories = $query->fetchAll();
-        
+
         if (is_array($categories) && !empty($categories)) {
             echo "<div>";
             foreach ($categories as $category) {
                 echo '<div class="category_tag_delete">
-                        <span class="category_tag_d">' . htmlspecialchars($category['category_name']) . 
-                        '<a href="process/delete_category.process.php?category_id=' . htmlspecialchars($category['category_id']) . '" id="delete_cat_btn">×</a>
+                        <span class="category_tag_d">' . htmlspecialchars($category['category_name']) .
+                    '<a href="process/delete_category.process.php?category_id=' . htmlspecialchars($category['category_id']) . '" id="delete_cat_btn">×</a>
                         </span>
                       </div>';
             }
@@ -132,7 +133,7 @@ class admin extends user {
     }
 
     //admin: get courses with a delete button
-    public function get_courses()
+    public function get_courses($page = 1, $limit = 6)
     {
         $query = $this->conn->prepare("SELECT * FROM course");
         $query->execute();
@@ -141,10 +142,11 @@ class admin extends user {
         if (is_array($courses) && !empty($courses)) {
             echo "<div class='courses-box'>";
             foreach ($courses as $course) {
-                echo "<div class='course_card'>";
+                echo "<div class='course_card' style='height: 450px;'>";
                 echo "<h3>" . $course['title'] . "</h3>";
                 echo "<p>By: " . $course['username'] . "</p>";
                 echo "<img src='" . $course['course_image'] . "'>";
+                echo "<p>" . 'Category: ' . $course['category_name'] . "</p>";
                 echo "<div class='course-actions'>";
                 echo "<a href='process/delete_course.process.php?course_id=" . $course['course_id'] . "' class='delete-btn'>Delete</a>";
                 echo "</div>";
@@ -161,7 +163,7 @@ class admin extends user {
         $query = $this->conn->prepare("INSERT INTO tag (tag_name) VALUES (:tag_name)");
         $query->bindParam(':tag_name', $tag_name);
         $query->execute();
-    }  
+    }
 
     //admin: get tags with a delete button
     public function get_tags()
@@ -169,13 +171,13 @@ class admin extends user {
         $query = $this->conn->prepare("SELECT * FROM tag ORDER BY tag_name ASC");
         $query->execute();
         $tags = $query->fetchAll();
-        
+
         if (is_array($tags) && !empty($tags)) {
             echo "<div>";
             foreach ($tags as $tag) {
                 echo '<div class="category_tag_delete">
-                        <span class="category_tag_d">' . htmlspecialchars($tag['tag_name']) . 
-                        '<a href="process/delete_tag.process.php?tag_id=' . htmlspecialchars($tag['tag_id']) . '" id="delete_tag_btn">×</a>
+                        <span class="category_tag_d">' . htmlspecialchars($tag['tag_name']) .
+                    '<a href="process/delete_tag.process.php?tag_id=' . htmlspecialchars($tag['tag_id']) . '" id="delete_tag_btn">×</a>
                         </span>
                       </div>';
             }
@@ -191,5 +193,48 @@ class admin extends user {
         $query->bindParam(':tag_id', $tag_id);
         $query->execute();
     }
-}
 
+    public function get_total_courses()
+    {
+        $query = $this->conn->prepare("SELECT COUNT(*) FROM course");
+        $query->execute();
+        return $query->fetchColumn();
+    }
+
+    public function get_courses_distribution()
+    {
+        $query = $this->conn->prepare("
+            SELECT category_name, COUNT(course_id) AS total_courses
+            FROM course
+            GROUP BY category_name
+        ");
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    public function get_course_with_most_enrollments()
+    {
+        $query = $this->conn->prepare("SELECT course.title, COUNT(course_student.user_id) AS total_enrollments
+                                        FROM course
+                                        LEFT JOIN course_student ON course.course_id = course_student.course_id
+                                        GROUP BY course.course_id
+                                        ORDER BY total_enrollments DESC
+                                        LIMIT 1");
+        $query->execute();
+        return $query->fetch();
+    }
+
+    public function get_top_teachers()
+    {
+        $query = $this->conn->prepare("
+            SELECT course.username, COUNT(course_student.user_id) AS total_enrollments
+            FROM course
+            LEFT JOIN course_student ON course.course_id = course_student.course_id
+            GROUP BY course.username
+            ORDER BY total_enrollments DESC
+            LIMIT 3
+        ");
+        $query->execute();
+        return $query->fetchAll();
+    }
+}
